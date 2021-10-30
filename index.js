@@ -56,6 +56,17 @@ async function run(){
             const query = {_id: ObjectId(req.params.id)};
             const result = await emailCollection.deleteOne(query);
             res.json(result);
+        });
+        app.put('/myOrders/:id', async(req,res)=>{
+            const query = {_id: ObjectId(req.params.id)};
+            const updateDoc = {
+                $set : {
+                    status: "approved"
+                },
+            };
+            const result = await emailCollection.updateOne(query,updateDoc);
+            console.log(result);
+
         })
     }
     finally{
