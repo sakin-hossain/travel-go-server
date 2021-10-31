@@ -27,16 +27,17 @@ async function run(){
         const packagesCollection = database.collection("packages");
         const emailCollection = database.collection("bookBYEmail");
 
-        // POST data
+        // POST packages
         app.post('/addPackages', async (req,res)=>{
             const result = await packagesCollection.insertOne(req.body);
             res.send(result);
         });
+        // get packages to server
         app.get('/addPackages', async (req,res)=>{
             const result = await packagesCollection.find({}).toArray();
             res.json(result);
         });
-        // get package using is
+        // get individual package
         app.get('/addPackages/:id', async (req,res)=>{
             const query = { _id: ObjectId(req.params.id) }
             const package = await packagesCollection.findOne(query);
@@ -57,6 +58,7 @@ async function run(){
             const result = await emailCollection.deleteOne(query);
             res.json(result);
         });
+        // update status
         app.put('/myOrders/:id', async(req,res)=>{
             const query = {_id: ObjectId(req.params.id)};
             const updateDoc = {
