@@ -65,8 +65,7 @@ async function run(){
                 },
             };
             const result = await emailCollection.updateOne(query,updateDoc);
-            console.log(result);
-
+            res.send(result);
         })
     }
     finally{
